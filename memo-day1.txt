@@ -21,6 +21,3 @@ docker inspect -f '{{ .Mounts }}' [container ID]
 docker run --rm -v kineteco:/usr/share/nginx/html/kinetoco_consumer_files irobust/kinetego:1.0
 docker ps
 docker inspect -f '{{ .Mounts }}' [container ID]
-
-
-testtt
