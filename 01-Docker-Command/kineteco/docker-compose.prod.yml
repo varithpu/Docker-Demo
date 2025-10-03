@@ -1,0 +1,10 @@
+services:
+  frontend:
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+          pids: 1
+      mode: replicated
+      replicas: 2

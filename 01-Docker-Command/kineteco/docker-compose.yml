@@ -1,0 +1,38 @@
+services:
+  frontend:
+    build:
+      context: .
+    ports:
+      - 80:80
+    volumes:
+      - web-data:/usr/share/nginx/html/kineteco_consumer_files
+    networks:
+      - kineteco-net
+    profiles:
+      - frontend
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2025-latest 
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Your_password123
+      - MSSQL_PID=Evaluation
+    ports:
+      - 1433:1433
+    hostname: sqlpreview
+    networks:
+      - kineteco-net
+    profiles:
+      - backend
+
+  message-queue:
+    image: rabbitmq:${RABBITMQ_VERSION:-4.1}-management
+    ports:
+      - 5671:5671
+
+volumes:
+  web-data:
+
+networks:
+  kineteco-net:
+    driver: bridge
